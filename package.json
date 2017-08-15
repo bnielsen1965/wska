@@ -1,6 +1,6 @@
 {
   "name": "wska",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Keep alive client layer on top of ws WebSocket to keep connections open and/or reconnect failed connections.",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bnielsen1965/wska.git"
+  },
+  "keywords": [
+    "websocket",
+    "websockets",
+    "reconnect",
+    "keep-alive",
+    "keep alive",
+    "ping",
+    "pong"
+  ],
+  "dependencies": {
+    "ws": "^3.1.0"
   }
 }
