@@ -73,7 +73,7 @@ function WebSocketKeepAlive(address, protocols, options, overrides) {
       heartbeatStart(); // message will keep alive, restart heartbeat
     })
     .on('error', function (err) {
-      self.emit('error', new Error(err.toString()));
+      self.emit('error', new Error(err.errors ? err.errors.join(", ") : err.toString()));
     })
     .on('close', function () {
       reconnectSocket();

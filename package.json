@@ -1,6 +1,6 @@
 {
   "name": "wska",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keep alive client layer on top of ws WebSocket to keep connections open and/or reconnect failed connections.",
   "main": "index.js",
   "scripts": {
