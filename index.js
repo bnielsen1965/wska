@@ -21,11 +21,13 @@ function WebSocketKeepAlive(address, protocols, options, overrides) {
   var self, heartbeatTimeout;
   self = this;
   overrides = overrides || {};
+  self.PROTOCOLS = protocols;
+  self.OPTIONS = options;
   self.settings = {
     HEARTBEAT_INTERVAL: overrides.heartbeatInterval || HEARTBEAT_INTERVAL,
     HEARTBEAT_TIMEOUT: overrides.heartbeatTimeout || HEARTBEAT_TIMEOUT,
     RECONNECT_INTERVAL: overrides.reconnectInterval || RECONNECT_INTERVAL,
-    PING_MESSAGE: overrides.pingMesage || PING_MESSAGE,
+    PING_MESSAGE: overrides.pingMessage || PING_MESSAGE,
     RECONNECT: (typeof(overrides.reconnect) === 'undefined' ? true : overrides.reconnect)
   };
   self.ws = null;
@@ -34,7 +36,7 @@ function WebSocketKeepAlive(address, protocols, options, overrides) {
   EventEmitter.call(self);
 
   // first connection attempt
-  createWebSocket(address, protocols, options);
+  createWebSocket(address, self.PROTOCOLS, self.OPTIONS);
 
   // create a websocket
   function createWebSocket(address, protocols, options) {
@@ -55,7 +57,7 @@ function WebSocketKeepAlive(address, protocols, options, overrides) {
   function reconnectSocket() {
     if (self.settings.RECONNECT) {
       setTimeout(function () {
-        createWebSocket(address, protocols, options);
+        createWebSocket(address, self.PROTOCOLS, self.OPTIONS);
       }, self.settings.RECONNECT_INTERVAL);
     }
   }
@@ -117,6 +119,14 @@ function WebSocketKeepAlive(address, protocols, options, overrides) {
   }
 }
 
+
+WebSocketKeepAlive.prototype.setProtocols = function (protocols) {
+  this.PROTOCOLS = protocols;
+};
+
+WebSocketKeepAlive.prototype.setOptions = function (options) {
+  this.OPTIONS = options;
+};
 
 WebSocketKeepAlive.prototype.getWebSocket = function () {
   return this.ws;

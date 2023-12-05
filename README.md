@@ -19,7 +19,7 @@ var wska = new WebSocketKeepAlive('ws://localhost:8080', null, null, { pingMessa
 - `heartbeatInterval` {Number} The number of milliseconds between each heartbeat transmission.
 - `heartbeatTimeout` {Number} The number of milliseconds before a heartbeat will timeout and fail.
 - `reconnectInterval` {Number} The number of milliseconds of delay before a reconnection attempt will be made.
-- `pingMesage` {String} A message that will be included with the ping frame sent for a heartbeat.
+- `pingMessage` {String} A message that will be included with the ping frame sent for a heartbeat.
 
 
 ### Events
@@ -80,6 +80,16 @@ The keep alive instance will intercept some connection errors and attempt to re-
 ### Methods
 
 After a WebSocketKeepAlive instance is created it will include a few methods for control of the connection state.
+
+
+#### WebSocketKeepAlive.setProtocols(protocols)
+
+Set new websocket protocols value. Used to modify the protocol headers sent when a reconnect happens, I.E. if an access token has changed since the last connection.
+
+
+#### WebSocketKeepAlive.setOptions(options)
+
+Set new websocket options.
 
 
 #### WebSocketKeepAlive.getWebSocket()
